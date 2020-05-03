@@ -19,8 +19,12 @@ import java.util.logging.Logger;
  */
 public class Exporter {
 
-    // the name of the queue to be used to communicate
-    private final static String QUEUE_NAME = "products";
+    // the name of the topic to be used to communicate
+    private static final String EXCHANGE_NAME = "topic_logs";
+    // the routing key to export to France
+    public static final String EXPORT_FRANCE = ".fr";
+    // the routing key to export to Spain
+    public static final String EXPORT_SPAIN = ".es";
     // the connection to the broker
     Connection connection = null; 
     // the channel to communicate with the broker
@@ -43,7 +47,7 @@ public class Exporter {
        
     }
 
-    public void exportObject(Product p)  {
+    public void exportObject(Product p, String export)  {
         
         // send a String representation of the product to the Queue
         try {

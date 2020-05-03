@@ -18,8 +18,12 @@ import java.util.logging.Logger;
  */
 public class Importer extends Thread {
     
-     // the name of the queue to be used to communicate
-    private final static String QUEUE_NAME = "products";
+     // the name of the topic to be used to communicate
+    private static final String EXCHANGE_NAME = "topic_logs";
+    // the routing key to import from France
+    public static final String IMPORT_FRANCE = "*.fr";
+    // the routing key to import from Spain
+    public static final String IMPORT_SPAIN = "*.es";
     // the connection to the broker
     Connection connection = null; 
     // the channel to communicate with the broker
@@ -28,8 +32,10 @@ public class Importer extends Thread {
     QueueingConsumer consumer = null;
     // the consumer appliction in order to add the received products
     private Consumer c=null;
+    
 
-   public Importer(Consumer c) throws Exception {
+   public Importer(Consumer c, String importer) throws Exception {
+       
         // the consumer reference is stored
         
         // Create a factory of connections to the MOM
@@ -56,21 +62,12 @@ public class Importer extends Thread {
     public void run() {
         
         while (true) {
-            try {
-                // receive products from the Queue
-                QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+            
+                // receive products from the topic from the specified importer
+                
                 
                 // add the products to the GUI
                 
-            } catch (InterruptedException ex) {
-                break;
-            } catch (ShutdownSignalException ex) {
-                Logger.getLogger(Importer.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ConsumerCancelledException ex) {
-                Logger.getLogger(Importer.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(Importer.class.getName()).log(Level.SEVERE, null, ex);
-            }
             }
     }
 

@@ -39,6 +39,7 @@ public class Producer extends javax.swing.JFrame {
         jTextFieldProductPrice = new javax.swing.JTextField();
         jTextFieldProductAmount = new javax.swing.JTextField();
         jButtonExit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,7 +51,7 @@ public class Producer extends javax.swing.JFrame {
 
         jLabelProductAmount.setText("Amount");
 
-        jButtonExport.setText("export");
+        jButtonExport.setText("export to France");
         jButtonExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExportActionPerformed(evt);
@@ -64,29 +65,41 @@ public class Producer extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("export to Spain");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonExport)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabelProductDescriptor)
-                        .addComponent(jLabelProductId)
-                        .addComponent(jLabelProductPrice)
-                        .addComponent(jLabelProductAmount)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldProductDescription)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonExport)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelProductDescriptor)
+                                .addComponent(jLabelProductId)
+                                .addComponent(jLabelProductPrice)
+                                .addComponent(jLabelProductAmount)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldProductId, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonExit))
-                        .addGap(0, 92, Short.MAX_VALUE)))
+                            .addComponent(jTextFieldProductDescription)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldProductId, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonExit, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(0, 70, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -108,11 +121,16 @@ public class Producer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelProductAmount)
                     .addComponent(jTextFieldProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonExport)
-                    .addComponent(jButtonExit))
-                .addGap(45, 45, 45))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonExport)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonExit)
+                        .addGap(38, 38, 38))))
         );
 
         pack();
@@ -124,8 +142,8 @@ public class Producer extends javax.swing.JFrame {
                         Integer.parseInt(jTextFieldProductId.getText()),
                         jTextFieldProductDescription.getText(),
                         Float.parseFloat(jTextFieldProductPrice.getText()),
-                        Integer.parseInt(jTextFieldProductAmount.getText()))
-        );
+                        Integer.parseInt(jTextFieldProductAmount.getText())),
+                 Exporter.EXPORT_FRANCE);
         jTextFieldProductId.setText("");
         jTextFieldProductDescription.setText("");
         jTextFieldProductPrice.setText("");        
@@ -136,6 +154,20 @@ public class Producer extends javax.swing.JFrame {
        
         System.exit(0);
     }//GEN-LAST:event_jButtonExitActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        exporter.exportObject(
+                new Product (
+                        Integer.parseInt(jTextFieldProductId.getText()),
+                        jTextFieldProductDescription.getText(),
+                        Float.parseFloat(jTextFieldProductPrice.getText()),
+                        Integer.parseInt(jTextFieldProductAmount.getText())),
+                Exporter.EXPORT_SPAIN);
+        jTextFieldProductId.setText("");
+        jTextFieldProductDescription.setText("");
+        jTextFieldProductPrice.setText("");        
+        jTextFieldProductAmount.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +209,7 @@ public class Producer extends javax.swing.JFrame {
     }
     private Exporter exporter;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonExport;
     private javax.swing.JLabel jLabelProductAmount;

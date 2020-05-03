@@ -23,9 +23,9 @@ public class Consumer extends javax.swing.JFrame {
     /**
      * Creates new form Consumer
      */
-    public Consumer() throws Exception {
+    public Consumer(String importingFrom) throws Exception {
         initComponents();
-        importer = new Importer(this);
+        importer = new Importer(this,importingFrom);
 
     }
     
@@ -104,6 +104,10 @@ public class Consumer extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        if (args.length<1)
+        {
+            System.out.println("Error, you need to specify where are you importing from");
+        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -134,7 +138,7 @@ public class Consumer extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Consumer().setVisible(true);
+                    new Consumer(args[0]).setVisible(true);
                 } catch (Exception ex) {
                     System.out.println("Error opening file " + ex);
                 }
