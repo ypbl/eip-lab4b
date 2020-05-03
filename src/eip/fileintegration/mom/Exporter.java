@@ -41,9 +41,8 @@ public class Exporter {
         // Create a new channel within this connection
         // to consume and to produce messages
         
-        // Declare the queue to be used with the parameters:
-        // durable:false, exclusive: false, autodelete:false,
-        // additional-arguments:null
+        // Declare the exchange of topic type
+        // channel.exchangeDeclare(EXCHANGE_NAME, "topic");
        
     }
 
@@ -51,6 +50,7 @@ public class Exporter {
         
         // send a String representation of the product to the Queue
         try {
+            // channel.basicPublish(EXCHANGE_NAME, export, null, p.productToString().getBytes("UTF-8"));
             
         } catch (Exception ex) {
             System.out.println("Error encoding "+ex);
